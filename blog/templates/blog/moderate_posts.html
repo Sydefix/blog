@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Moderate Posts</h2>
+  <ul>
+    {% for post in posts %}
+      <li>
+        {{ post.title }} - {{ post.author.username }}
+        <a href="{% url 'ban_user' post.author.id %}">Ban User</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

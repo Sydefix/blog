@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.content }}</p>
+  
+  <h3>Comments</h3>
+  <ul class="comment-list">
+    {% for comment in comments %}
+      <li>
+        {{ comment.content }} - {{ comment.author.username }}
+        {% if user == comment.author or user.is_staff %}
+          <div class="comment-actions">
+            <a href="{% url 'remove_comment' comment.id %}">Remove Comment</a>
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  
+  <h3>Add Comment</h3>
+  <form method="post" class="comment-form">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+{% endblock %}

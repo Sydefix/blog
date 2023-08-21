@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome to Our Blog!</h2>
+  <p>Explore our latest blog posts and engage with the community.</p>
+  
+  <h3>Latest Posts</h3>
+  <ul>
+    {% for post in posts %}
+      <li><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+  
+  {% if user.is_authenticated %}
+    <p><a href="{% url 'create_post' %}">Create a New Post</a></p>
+  {% else %}
+    <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a> to create a post.</p>
+  {% endif %}
+{% endblock %}
